@@ -25,6 +25,7 @@ import com.alibaba.nacos.naming.core.v2.client.manager.impl.ConnectionBasedClien
 import com.alibaba.nacos.naming.core.v2.client.manager.impl.EphemeralIpPortClientManager;
 import com.alibaba.nacos.naming.core.v2.client.manager.impl.PersistentIpPortClientManager;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -37,6 +38,7 @@ import java.util.HashSet;
  */
 @DependsOn({"clientServiceIndexesManager", "namingMetadataManager"})
 @Component("clientManager")
+@Primary
 public class ClientManagerDelegate implements ClientManager {
     
     private final ConnectionBasedClientManager connectionBasedClientManager;

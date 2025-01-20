@@ -43,6 +43,9 @@ import org.springframework.context.annotation.FilterType;
 public class Nacos {
     
     public static void main(String[] args) {
+        // true 单机模式 false 为集群模式 集群模式需搭配 cluster.conf 使用 使用方法请查看文档
+        System.setProperty("nacos.standalone", "true");
+        System.setProperty("server.tomcat.accesslog.enabled", "false");
         SpringApplication.run(Nacos.class, args);
     }
 }

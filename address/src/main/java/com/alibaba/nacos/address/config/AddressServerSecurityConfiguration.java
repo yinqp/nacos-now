@@ -34,7 +34,7 @@ public class AddressServerSecurityConfiguration {
     @Order(99)
     public SecurityFilterChain addressServerSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
-                requestMatcherRegistry -> requestMatcherRegistry.mvcMatchers("/nacos/v1/as/**").authenticated()).csrf()
+                requestMatcherRegistry -> requestMatcherRegistry.requestMatchers("/nacos/v1/as/**").authenticated()).csrf()
                 .disable().httpBasic();
         return http.build();
     }

@@ -43,8 +43,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -125,7 +125,7 @@ public class ConfigChangeAspect {
     /**
      * Publish or update config.
      */
-    @Around(CLIENT_INTERFACE_PUBLISH_CONFIG)
+    @Around(value = CLIENT_INTERFACE_PUBLISH_CONFIG,argNames = "request,response,dataId,group,tenant,content,tag,appName,srcUser,configTags,desc,use,effect,type")
     Object publishOrUpdateConfigAround(ProceedingJoinPoint pjp, HttpServletRequest request,
             HttpServletResponse response, String dataId, String group, String tenant, String content, String tag,
             String appName, String srcUser, String configTags, String desc, String use, String effect, String type)
@@ -156,7 +156,7 @@ public class ConfigChangeAspect {
     /**
      * Remove config.
      */
-    @Around(CLIENT_INTERFACE_REMOVE_CONFIG)
+    @Around(value = CLIENT_INTERFACE_REMOVE_CONFIG,argNames = "request,response,dataId,group,tenant")
     Object removeConfigByIdAround(ProceedingJoinPoint pjp, HttpServletRequest request, HttpServletResponse response,
             String dataId, String group, String tenant) throws Throwable {
         final ConfigChangePointCutTypes configChangePointCutType = ConfigChangePointCutTypes.REMOVE_BY_HTTP;
@@ -179,7 +179,7 @@ public class ConfigChangeAspect {
     /**
      * Remove config by ids.
      */
-    @Around(CLIENT_INTERFACE_BATCH_REMOVE_CONFIG)
+    @Around(value = CLIENT_INTERFACE_BATCH_REMOVE_CONFIG,argNames = "request,ids")
     public Object removeConfigByIdsAround(ProceedingJoinPoint pjp, HttpServletRequest request, List<Long> ids)
             throws Throwable {
         final ConfigChangePointCutTypes configChangePointCutType = ConfigChangePointCutTypes.REMOVE_BATCH_HTTP;
@@ -200,7 +200,7 @@ public class ConfigChangeAspect {
     /**
      * Import config.
      */
-    @Around(CLIENT_INTERFACE_IMPORT_CONFIG)
+    @Around(value = CLIENT_INTERFACE_IMPORT_CONFIG,argNames = "request,srcUser,namespace,policy,file")
     public Object importConfigAround(ProceedingJoinPoint pjp, HttpServletRequest request, String srcUser,
             String namespace, SameConfigPolicy policy, MultipartFile file) throws Throwable {
         final ConfigChangePointCutTypes configChangePointCutType = ConfigChangePointCutTypes.IMPORT_BY_HTTP;
@@ -224,7 +224,7 @@ public class ConfigChangeAspect {
     /**
      * Publish or update config.
      */
-    @Around(CLIENT_INTERFACE_PUBLISH_CONFIG_RPC)
+    @Around(value = CLIENT_INTERFACE_PUBLISH_CONFIG_RPC,argNames = "request,meta")
     Object publishConfigAroundRpc(ProceedingJoinPoint pjp, ConfigPublishRequest request, RequestMeta meta)
             throws Throwable {
         final ConfigChangePointCutTypes configChangePointCutType = ConfigChangePointCutTypes.PUBLISH_BY_RPC;
@@ -255,7 +255,7 @@ public class ConfigChangeAspect {
     /**
      * Remove config.
      */
-    @Around(CLIENT_INTERFACE_REMOVE_CONFIG_RPC)
+    @Around(value = CLIENT_INTERFACE_REMOVE_CONFIG_RPC,argNames = "request,meta")
     Object removeConfigAroundRpc(ProceedingJoinPoint pjp, ConfigRemoveRequest request, RequestMeta meta)
             throws Throwable {
         final ConfigChangePointCutTypes configChangePointCutType = ConfigChangePointCutTypes.REMOVE_BY_RPC;
