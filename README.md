@@ -32,7 +32,12 @@ Nacos provides four major functions.
 * **Service and MetaData Management**
 	
     Nacos provides an easy-to-use service dashboard to help you manage your services metadata, configuration, kubernetes DNS, service health and metrics statistics.
- 
+
+
+## Support SpringBoot3
+
+See orgin/springboot3
+
 
 ## Quick Start
 It is super easy to get started with your first project.
